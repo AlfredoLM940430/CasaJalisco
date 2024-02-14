@@ -1,0 +1,299 @@
+@use './../base/color' as v;
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&family=Sixtyfour&family=Source+Code+Pro&display=swap');
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#Boletos {
+    margin-top: 9rem;
+    padding: 2rem;
+    background: rgb(0,0,0);
+    background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(37,43,175,1) 38%, rgba(37,43,175,1) 56%, rgba(0,0,0,1) 100%);  
+}
+
+#Boletos h5 {
+    font-family: 'Russo One', sans-serif;
+    color: white;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+#Boletos h6 {
+    color: v.$verde;
+    font-weight: bolder;
+    font-size: 5rem;
+    font-family: 'Source Code Pro', monospace;
+    text-shadow: -1px 1px 0 #000000,
+}
+
+#Boletos p {
+    color: rgb(102, 255, 0);
+    font-weight: bold;
+}
+#Boletos span {
+    font-size: 1.2rem;
+}
+
+.precios {
+    background-color: black;
+    padding: 2.4rem;
+}
+
+.precios p {
+    font-family: 'Source Code Pro', monospace;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#premio h5 {
+    color: v.$verde;
+    font-weight: bold;
+}
+#premio h6 {
+    font-family: 'Russo One', sans-serif;
+    font-size: 5rem;
+    color: v.$verde;
+    font-weight: bold;
+    margin-top: 3rem;
+}
+
+#premio hr {
+    border-width: 3px;
+    border-style: 1px solid;
+    border-color:green;
+    width: 15rem;
+    margin-top: 4rem;
+}
+
+#premio p {
+    font-weight: bold;
+    color:green;
+}
+
+.boletos {
+    // padding: 3.5rem;
+    height: 10rem;
+    background: rgb(0,0,0);
+    background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(37,43,175,1) 38%, rgba(37,43,175,1) 56%, rgba(0,0,0,1) 100%);
+}
+.boletos p {
+    color: rgb(255, 255, 255);
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
+
+.boletos i {
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+#BoletosId {
+    scroll-margin-top: 142px;
+}
+
+#BoletosId input:first-child {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    width: 16rem;
+    border: 1px solid v.$verde;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// #BoletosId button {
+//     font-family: 'Source Code Pro', monospace;
+//     border: 1px solid v.$verde;
+//     display: block;
+//     margin-left: auto;
+//     margin-right: auto;
+//     margin-bottom: 2rem;
+//     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+// }
+#BoletosId h5 {
+    font-family: 'Russo One', sans-serif;
+    font-size: 2rem;
+    color: v.$verde;
+}
+
+.click-to {
+    // font-family: 'Russo One', sans-serif;
+    font-weight: bold;
+    color: gray;
+}
+
+#comprar {
+    margin-top: 1rem;
+    display: block;
+    margin: auto;
+}
+
+#global {
+	max-height: 100vh;
+	width: 95%;
+	border: 1px solid v.$verde;
+	background: #f1f1f1;
+	overflow-y: scroll;
+}
+
+#mensajes {
+	height: auto;
+}
+
+.grid-it {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+}
+
+.col--full {
+    padding: 0.2rem;
+    font-weight: bold;
+    background-color: v.$verde;
+    // background: radial-gradient(circle, rgba(0,126,16,1) 0%, rgba(0,137,13,1) 57%, rgba(0,226,43,1) 100%); 
+    // background-color: black;
+    border: solid 1px rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}
+
+.apartados {
+    display: block;
+    justify-content: center;
+    width: 90%;
+}
+
+#Ap {
+    padding: 0.3rem;
+    background-color: v.$verde;;
+}
+
+#Ap li {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: v.$verde;;
+}
+#Ap h6 {
+    font-family: 'Russo One', sans-serif;
+}
+#Ap p:first-child {
+    font-size: 0.9rem;
+    // font-family: 'Russo One', sans-serif;
+    font-weight: bolder;
+    color: rgb(251, 255, 0);
+}
+
+#Ap button {
+    margin-bottom: 0;
+    border: none;
+    color: white;
+    font-weight: bold;
+    background-color: rgba(37,43,175,1);
+    // background: rgb(0,0,0);
+    // background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(37,43,175,1) 38%, rgba(37,43,175,1) 56%, rgba(0,0,0,1) 100%);  
+}
+
+.numero-disponible button {
+    display: block;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.numero-disponible p {
+    font-family: 'Russo One', sans-serif;
+    color: blue;
+}
+
+.ya-no-disponible {
+    font-family: 'Russo One', sans-serif;
+    color: rgb(209, 143, 0);
+}
+
+.numero-no-disponible {
+    font-family: 'Russo One', sans-serif;
+    color: red;
+}
+
+.fa-check {
+    font-size: 1.5rem;
+    color: v.$verde;
+}
+
+.chk-input {
+    text-align: center;
+    margin: 1rem 1rem 0 1rem;
+}
+
+.chk-input label {
+    margin: 0rem 1rem 0 1rem;
+}
+
+.random-box {
+    max-width: 2rem;
+}
+
+.modal-body {
+    word-break: break-all;
+}
+
+.modal-body h6 {
+    font-family: 'Russo One', sans-serif;
+}
+
+.modal-compra button:first-child {
+    display: block;
+    margin: auto;
+}
+
+.modal-compra label {
+    font-family: 'Russo One', sans-serif;
+}
+
+.isApartado {
+    font-family: 'Russo One', sans-serif;
+    // color: black;
+}
+
+@media (max-width: 665px) {
+    #Boletos {
+        margin-top: 6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #Boletos {
+        margin-top: 6rem;
+    }
+    #Boletos h5 {
+        font-size: 2rem;
+    }
+    #Boletos h6 {
+        font-size: 4rem;
+    }
+    #premio h6 {
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 374px) {
+    #Boletos h5 {
+        font-size: 1.5rem;
+    }
+    #Boletos h6 {
+        font-size: 3.5rem;
+    }
+    #premio h6 {
+        font-size: 3.5rem;
+    }
+}

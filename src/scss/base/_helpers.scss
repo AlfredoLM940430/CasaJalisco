@@ -1,0 +1,45 @@
+@use './color' as v;
+
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&family=Source+Code+Pro&display=swap');
+
+
+html,body{
+    scroll-behavior: smooth;
+}
+
+button, a {
+    text-decoration: none;
+    border: none;
+    background: none;
+}
+
+button:hover, a:hover {
+    color: white;
+}
+
+.btn-menu {
+    font-size: 1.2rem;
+    color: white;
+}
+.btn-menu:hover {
+    border: 1px solid v.$verde;
+    border-radius: 5px;
+}
+
+.btn-disponibles {
+    margin-top: 11rem;
+    background-color: v.$navbar;
+    border-color: v.$verde;
+    color: white;
+    border-style: solid;
+    border-width: 2px;
+    font-size: 1.2rem;
+}
+
+/*
+*{
+    background: #000 !important;
+    color: #0f0 !important;
+    outline: solid #f00 1px !important;
+}
+*/

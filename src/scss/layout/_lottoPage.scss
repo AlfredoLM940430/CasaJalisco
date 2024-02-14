@@ -1,0 +1,92 @@
+@use './../base/color' as v;
+
+.lotto-header {
+    height: 100vh;
+    background-image: image-set(url(/img/dinero.avif) 1x, url(/img/dinero.webp) 1x, url(/img/dinero.jpg) 1x);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgb(255, 233, 193);
+}
+
+#Nosotros {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.895), rgba(0, 0, 0, 0.895)),
+    image-set(url(/img/lotto.avif) 1x, url(/img/lotto.webp) 1x, url(/img/lotto.png) 1x);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    scroll-margin-top: 142px;
+}
+
+.info-section {
+    min-height: 29rem;
+}
+
+#Nosotros h2, #Contacto h2, #Preguntas h2 {
+    font-family: 'Russo One', sans-serif;
+    font-size: 2.7rem;
+    font-weight: bold;
+    background-color: v.$verde;
+}
+#Nosotros p {
+    font-weight: bold;
+    font-size: 1.8rem;
+    color: white;
+}
+#Nosotros span {
+    color: rgb(0, 251, 255);
+    font-size: 1rem;
+}
+
+#Preguntas, #Contacto {
+    scroll-margin-top: 142px;
+}
+
+#Contacto {
+    background-image: image-set(url(/img/contacto.avif) 1x, url(/img/contacto.webp) 1x, url(/img/contacto.jpg) 1x);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+#Contacto p {
+    color: v.$verde;
+    font-weight: bold;
+}
+
+.contacto-info {
+    color: v.$verde;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.fa-whatsapp {
+    font-size: 2.5rem;
+    color: v.$verde;
+}
+
+.fa-facebook {
+    font-size: 2.5rem;
+    color: #2b51a2;
+}
+
+#Preguntas h6 {
+    font-weight: bold;
+    color: v.$verde;
+    font-size: 1.2rem;
+}
+#Preguntas p {
+    font-weight: 600;
+}
+#Preguntas span {
+    color: v.$verde;
+    font-weight: bold;
+}
+
+#Preguntas hr {
+    border-width: 3px;
+    border-style: 1px solid;
+    border-color:green;
+    width: 15rem;
+    margin-top: 4rem;
+}

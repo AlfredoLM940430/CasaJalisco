@@ -1,0 +1,53 @@
+@use './../base/color' as v;
+
+.menu {
+    background: v.$navbar;
+    height: 9rem;
+    border-top: 2rem solid;
+    border-bottom: 2rem solid;
+    border-color: v.$verde;
+    position: fixed;
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    z-index: 10;
+}
+
+.container-menu {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.mobil {
+    display: none;
+}
+
+.lotto-img {
+    margin-top: 1.5rem;
+    max-width: 11rem;
+}
+
+.fa-clover {
+    color: v.$verde;
+}
+
+@media (max-width: 665px) {
+    .desk {
+        display: none;
+    }
+    .mobil {
+        display: block;
+    }
+    .lotto-img {
+        margin-top: 2.5rem;
+        max-width: 9rem;
+    }
+    .menu {
+        height: 6rem;
+        border-top: 1rem solid;
+        border-bottom: 1rem solid;
+        border-color: v.$verde;
+    }
+}

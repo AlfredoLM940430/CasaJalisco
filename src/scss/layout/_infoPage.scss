@@ -1,0 +1,66 @@
+@use './../base/color' as v;
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&family=Sixtyfour&family=Source+Code+Pro&display=swap');
+
+.info-comprobante h6 {
+    font-family: 'Russo One', sans-serif;
+    font-size: 1.5rem;
+    color: v.$verde;
+    font-weight: bold;
+}
+.info-comprobante p {
+    font-size: 1.5rem;
+    color: lighten(v.$verde, $amount: 10);
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.info-box {
+    border: 3px solid red;
+    margin-bottom: 1rem;
+    width: 30rem;
+    height: auto;
+}
+
+.info-image {
+    display: flex;
+    justify-content: center;
+    width: 10rem;
+}
+
+.transfer {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    border: 2px solid black;
+}
+.transfer h6 {
+    color: red;
+    font-weight: bold;
+}
+
+.box-saturada {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: red;
+}
+
+.info-index {
+    color: rgb(0, 4, 111);
+}
+
+.info-dudas {
+    background-color: rgb(45, 45, 45);
+    padding: 2rem;
+}
+.info-dudas h4 {
+    color: white;
+    font-weight: bold;
+}
+
+@media (max-width: 665px) {
+    .info-box {
+        width: 90%;
+    }
+    .info-image {
+        width: 8rem;
+    }
+}
