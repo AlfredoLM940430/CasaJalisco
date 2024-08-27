@@ -5,7 +5,6 @@ export const InfoPage = () => {
     return (
         <>
             <header>
-                <NavBar/>
                 <div id="Boletos" className="d-flex justify-content-center">
                     <div className="align-self-center">
                         <h5 className="text-center p-4">Información de Pago</h5>
@@ -65,6 +64,5 @@ export const InfoPage = () => {
                     <i className="fa-brands fa-whatsapp fa-2xl"></i>
                 </a>
             </div>
-            <Footer/>
         </>
 )}

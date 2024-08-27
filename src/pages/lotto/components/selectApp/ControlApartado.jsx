@@ -1,7 +1,17 @@
-import { BoostrapModal } from "./BoostrapModal";
-import { ControlModal } from "./ControlModal";
+import { useEffect, useState } from "react";
+import { RandomApp } from "./";
 
 export const ControlApartado = ({boletos, isApartado, setIsApartado, isNumero, setIsNumero}) => {
+    
+    const [isset, setIsset] = useState(0);
+
+    useEffect(() => {
+        if(isNumero === '') {
+            setIsset(0);
+            return;
+        } 
+        setIsset(boletos.find(el => el.numero === Number(isNumero)))
+    }, [isNumero]);
 
     const apartarNumero = (e) => {
         e.preventDefault();
@@ -11,9 +21,9 @@ export const ControlApartado = ({boletos, isApartado, setIsApartado, isNumero, s
         setIsNumero('');
     }
 
-    if(boletos.includes(Number(isNumero))) {
-        const formato = isNumero.toString().padStart(4, '0');
-        if (isApartado.includes(Number(isNumero))) {
+    if(isset) {
+        const formato = isNumero.toString().padStart(5, '0');
+        if(isApartado.includes(isset.numero)) {
             return <p className="text-center ya-no-disponible">Ya Tienes Apartado Este Numero</p>
         }
         return (
@@ -26,8 +36,12 @@ export const ControlApartado = ({boletos, isApartado, setIsApartado, isNumero, s
     }
 
     if(isNumero === '') {
-        return <BoostrapModal boletos={boletos} isApartado={isApartado} setIsApartado={setIsApartado} />;
-        // return <ControlModal boletos={boletos} isApartado={isApartado} setIsApartado={setIsApartado}/>;
+        return (
+            (boletos.length - isApartado.length <= 3 || isApartado.length >= 50)
+            ? <></>
+            : <RandomApp boletos={boletos} isApartado={isApartado} setIsApartado={setIsApartado} />
+        );
+        //return <BoostrapModal boletos={boletos} boletos={boletos} isApartado={isApartado} setIsApartado={setIsApartado} />;
     }
     
     return (

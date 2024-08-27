@@ -135,6 +135,12 @@ input[type=number] {
     color: gray;
 }
 
+.click-toD {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: yellow;
+}
+
 #comprar {
     margin-top: 1rem;
     display: block;
@@ -260,9 +266,23 @@ input[type=number] {
     font-family: 'Russo One', sans-serif;
 }
 
-.isApartado {
+.boti {
     font-family: 'Russo One', sans-serif;
     // color: black;
+}
+
+.xmark {
+    float: right;
+    margin: 0;
+    padding-bottom: 2rem;
+    padding-left: 2rem;
+}
+
+.fa-square-xmark {
+    font-size: 1.2rem;
+    color: red;
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,0) 14%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 37%, rgba(255,255,255,1) 73%, rgba(0,142,9,0) 76%, rgba(37,175,40,0) 100%); 
 }
 
 @media (max-width: 665px) {

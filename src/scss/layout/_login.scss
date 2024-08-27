@@ -1,0 +1,21 @@
+@use './../base/color' as v;
+
+.login-main {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.895), rgba(0, 0, 0, 0.895)),
+    image-set(url(/img/lotto.avif) 1x, url(/img/lotto.webp) 1x, url(/img/lotto.png) 1x);
+}
+
+.login-form {
+    background-color: rgb(68, 68, 68);
+    padding: 2.5rem;
+    border-radius: 1rem;
+}
+
+.login-main label {
+    color: rgb(255, 255, 255);
+}
+
+.login-home {
+    position: fixed;
+    padding: 1.5rem;
+}

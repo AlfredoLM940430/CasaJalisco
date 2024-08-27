@@ -1,6 +1,10 @@
+import { Footer } from "../../components/Footer"
+import { AdminNav } from "./components/AdminNav"
+
 export const LottoDash = () => {
     return (
         <>
-            <h1>Admin</h1>
+            {/* <AdminNav/>
+            <Footer/> */}
         </>
 )}

@@ -1,37 +1,44 @@
 import { useEffect, useState } from "react";
-import { Footer } from "../../components/Footer";
-import { NavBar } from "../../components/NavBar"
+import { useLottoStore } from "../../hooks/useLottoStore";
+import { NoComprados } from "./components/NoComprados";
 
 export const MiBoleto = () => {
 
-    const celular = ['3311486142','3333333333'];
-
-    const [isboleto, setIsboleto] = useState(false);
+    // API
+    const { startFindBoletos, boletos_usuarios } = useLottoStore();
     const [isValid, setIsValid] = useState('');
     
-    const findCel = (e) => {
-        setIsboleto(false);
+    const findCel = async(e) => {
+        //setIsboleto(false);
         if(e.target.value.length > 10) e.target.value = e.target.value.slice(0, 10);
         let number = e.target.value.replace(/\D/g, '');
         setIsValid(number);
-    }
+        if(number.length === 10) {
+            e.target.blur();
+            let form = {telefono: number}
+            let response = await startFindBoletos(form);
+            if(response.ok === false) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Error",
+                    text: response.msg,
+                });
+            }
+            setIsValid('');
+        }
+    }    
+    const aux = (Object.keys(boletos_usuarios).length > 0) ? boletos_usuarios : '';
 
     useEffect(() => {
-        if(celular.includes(isValid)) {
-            setIsboleto(true);
-            setIsValid('');
-            return;
+        console.log(aux);
+        if(aux !== '') {
+            window.scroll({top: 300, behavior: "smooth"})
         }
-        if(isValid.length >= 10 && !celular.includes(isValid)) {
-            Swal.fire("Numero no econtrado");
-            setIsValid('');
-        }
-    }, [isValid])
+    }, [boletos_usuarios]);
 
     return (
         <>
             <header>
-                <NavBar/>
                 <div id="Boletos" className="d-flex justify-content-center">
                     <div className="align-self-center">
                         <h5 className="text-center p-4">
@@ -43,72 +50,63 @@ export const MiBoleto = () => {
 
             <div className="n-ticket">
                 <h4 className="text-center title m-4">Ingresa tu Celular</h4> 
-                <div className="container d-flex justify-content-center mb-5">
+                <div className="container d-flex justify-content-center">
                     <input className="form-control" type="tel" value={isValid} onChange={findCel}/>
                 </div>
             </div>
-
-            <hr />
+            <div className="mt-1 p-0 boleto-dudas text-center">
+                <a target="_blank" rel="noopener" href={"https://wa.me/+523311486142"}><i className="fa-brands fa-whatsapp"></i></a>
+                <p>Tienes alguna duda?</p>
+            </div>
+            <hr id="info"/>
 
             {
-                isboleto ? 
+                (aux.comprados !== undefined && aux.comprados.length > 0) ? 
                 (<>
-                <div className="aux"></div>
-                <div className="d-flex justify-content-center">
-                    <div className="ticket container">
-                        <div className="left"></div>
-                        <div className="right"></div>
-                        <div className="ticket-content-wrapper"></div>
-                    </div>
-                
-                    <div className="datos container">
-                        <div className="boleto-title">
-                        <picture>
-                            <source srcSet="/img/lotto-image.avif" type="image/avif"/>
-                            <source srcSet="/img/lotto-image.webp" type="image/webp"/>
-                            <img src="/img/lotto-image.png" alt="Imagen React" className=""/>
-                        </picture>
-                            <h4>$50,000<span>MXN</span></h4>
+                <div className="isTrue mb-2">
+                    {/* <h5>Premio: $50,000 MXN</h5> */}
+                    <h5 className="mt-2">Mucha suerte! <i className="fa-solid fa-clover"/></h5>
+                    <div className="info-card mb-4">
+                        <h6 className="m-2">Resumen:</h6>
+                        <p> <i className="fa-solid fa-user"></i> Nombre: <span>{`${aux.usuario.nombre + " " + aux.usuario.apellido}`}</span></p>
+                        <p> <i className="fa-brands fa-square-whatsapp"></i> Telefono: <span>{`${aux.usuario.telefono}`}</span></p>
+                        <p> <i className="fa-solid fa-location-dot"></i> Ubicacion: <span>{`${aux.usuario.estado}`}</span></p>
+                        <p> <i className="fa-solid fa-gift"></i> Premio: <span>$150,000</span></p>
+                        <p> <i className="fa-solid fa-ticket"></i> Boletos Pagados: <span>{`${aux.comprados.length} Numeros `}<i className="fa-solid fa-hand-point-down"></i> <i className="fa-solid fa-hand-point-down"></i> <i className="fa-solid fa-hand-point-down"></i></span></p>
+                        {/* <h5 className="">Tus Boletos:</h5> */}
+                        <div className="container-t">
+                            {
+                                aux.comprados.map((e) => {
+                                    return (
+                                        <div className="ticketN m-1" key={e}>
+                                            <p className="serialN">{e}</p>
+                                        </div>                                      
+                                    )
+                                })
+                            }
                         </div>
-                        <hr  />
-                        <p className="text-center casa-jalisco">Casa Jalisco</p>
-                        <div className="ticket-cuerpo">
-                            <p className="m-0 p-0">Nombre: <span>José Alfredo</span></p>
-                            <p className="m-0 p-0">Apellido: <span>López Mares</span></p>
-                            <p className="m-0 p-0">Estado: <span>Jalisco</span></p>
-                            <p className="m-0 p-0">Pagado: <span>Pagado</span></p>
-                        </div>
-                        <div className="nnn">
-                            <hr className="hr-fnl" />
-                            <p className="m-0 text-center">Numeros:</p>
-                            <p className="m-0 text-center n-boletos">
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                                &#60;<span>0001</span>&#62;
-                            </p>
-                        </div>
+                        { (aux.apartados.length > 0) ?
+                            
+                            (<>
+                                <p><i className="fa-solid fa-ticket"></i> Boletos Apartados: <span>{`${aux.apartados.length} Numeros `}<i className="fa-solid fa-hand-point-down"></i> <i className="fa-solid fa-hand-point-down"></i> <i className="fa-solid fa-hand-point-down"></i></span></p>
+                                <p className="info-apartados">*Apurate a comprarlos o podrias perderlos <i className="fa-regular fa-clock"></i></p>
+                                <div className="container-t">
+                                    {
+                                        aux.apartados.map((e) => {
+                                            return (
+                                                <div className="ticketN m-1" key={e}>
+                                                    <p className="serialN">{e}</p>
+                                                </div>                                      
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </>) : <></>
+                        }
                     </div>
                 </div>
                 </>)
-                :(<div className="no-ticket"></div>)
+                : <NoComprados aux={aux}/>
             }
-        <Footer/>
         </>
 )}

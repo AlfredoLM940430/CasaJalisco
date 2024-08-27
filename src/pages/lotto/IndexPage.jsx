@@ -4,10 +4,10 @@ import { Footer } from "../../components/Footer"
 import { HashLink } from "react-router-hash-link"
 
 export const IndexPage = () => {
+
     return (
         <>
             <header className="lotto-header">
-                <NavBar/>
                 <div className="container d-flex justify-content-center">
                     <HashLink className="btn btn-disponibles text-white" to="/boletos#BoletosId">-Lista de Disponibles-</HashLink>
                 </div>
@@ -34,11 +34,7 @@ export const IndexPage = () => {
                         <p className="text-center">ARRIESGA POCO Y GANA MUCHO!</p>
                         <p className="text-center">Información o Dudas en:</p>
                         <div className="text-center pt-2">
-                            {/* <a className="m-2" 
-                                href="https://wa.me/+523322363754?text=I'm%20inquiring%20about%20the%20apartment%20listing">
-                                <i className="fa-brands fa-whatsapp fa-2xl"></i>
-                            </a> */}
-                            <a className="m-2" href="#"><i className="fa-brands fa-whatsapp"></i></a>
+                            <a className="m-2" href={"https://wa.me/+523311486142"}><i className="fa-brands fa-whatsapp"></i></a>
                             <a className="m-2" href="#"><i className="fa-brands fa-facebook"></i></a>
                         </div>
                     </div>
@@ -76,6 +72,5 @@ export const IndexPage = () => {
             </div>
 
             </main>
-            <Footer/>
         </>
 )}

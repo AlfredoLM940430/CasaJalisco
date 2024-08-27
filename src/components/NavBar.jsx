@@ -6,17 +6,17 @@ export const NavBar = () => {
         <div className="menu">
             <div className="container-menu">
                 <nav className="mobil">
-                    <NavLink className="btn btn-menu" to="/boletos"><i className="fa-solid fa-ticket fa-2xl"></i></NavLink>
+                    {/* <NavLink className="btn btn-menu" to="/boletos"><i className="fa-solid fa-ticket fa-2xl"></i></NavLink> */}
+                    <a className="btn btn-menu" href="/boletos"><i className="fa-solid fa-ticket fa-2xl"></i></a>
                 </nav>
                 <div>
-                    <NavLink to="/">
+                    <HashLink to="/#">
                     <picture>
                         <source srcSet="/img/lotto-image.avif" type="image/avif"/>
                         <source srcSet="/img/lotto-image.webp" type="image/webp"/>
                         <img src="/img/lotto-image.png" alt="Imagen React" className="lotto-img"/>
                     </picture>
-                        {/* <img className="lotto-img" src="img/loto-image.png" alt=""/> */}
-                    </NavLink>
+                    </HashLink>
                 </div>
                 
                 <nav className="desk">
@@ -24,7 +24,8 @@ export const NavBar = () => {
                     <HashLink className="btn btn-menu" to="/#">Inicio</HashLink>
                     <HashLink className="btn btn-menu" to="/#Nosotros">Nosotros</HashLink>
                     <HashLink className="btn btn-menu" to="/#Contacto">Contacto</HashLink>
-                    <NavLink className="btn btn-menu" to="/boletos">Comprar Boletos</NavLink>
+                    {/* <NavLink className="btn btn-menu" to="/boletos">Comprar Boletos</NavLink> */}
+                    <a className="btn btn-menu" href="/boletos">Comprar Boletos</a>
                     
                     <button className="nav-item dropdown p-0 btn btn-menu">
                         <div className="nav-link dropdown-toggle p-2" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
