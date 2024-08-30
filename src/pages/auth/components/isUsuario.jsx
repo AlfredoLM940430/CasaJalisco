@@ -58,7 +58,7 @@ export const IsUsuario = () => {
         <>
             <div className="registro-view">
                 <div className="n-ticket">
-                    <h4 className="text-center title m-4">Buscar usuario</h4> 
+                    <h4 className="text-center title p-4">Buscar usuario</h4> 
                     <div className="container d-flex justify-content-center">
                         <input className="form-control" type="tel" placeholder="Telefono" value={isValid} onChange={findCel}/>
                     </div>
@@ -66,7 +66,7 @@ export const IsUsuario = () => {
                 { (Object.keys(usuarioId).length > 2)
                  ?  (
                         <>
-                            <div className="container mt-5">
+                            <div className="container pt-5">
                                 <h2 className="text-center">Info:</h2>
                                 <table className="table table-bordered">
                                     <thead className="thead-dark">

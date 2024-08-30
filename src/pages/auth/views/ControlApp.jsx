@@ -22,11 +22,16 @@ export const ControlApp = () => {
     return (
         <>
             <AdminNav/>
-            <div className="d-flex justify-content-center mt-3">
-                <button className="btn btn-primary m-1" onClick={viewUsuarios}>Usuarios</button>
-                <button className="btn btn-primary m-1" onClick={viewBoletos}>Boletos</button>
+            <div className="d-flex justify-content-center pt-3 registro-ops">
+                <button className="btn m-1 buscar-usuario" onClick={viewUsuarios}>Buscar Usuarios</button>
+                <button className="btn m-1 buscar-boleto" onClick={viewBoletos}>Buscar Boletos</button>
             </div>
-            <hr />
+            <div className="d-flex justify-content-center registro-ops">
+                <button className="btn m-1 set-apartado" onClick={viewUsuarios}>Generar Boleto Apartado</button>
+                <button className="btn m-1 t-ganador" onClick={viewUsuarios}><i className="fa-solid fa-crown"></i> Boleto Ganador</button>
+                <button className="btn m-1 set-comprado" onClick={viewBoletos}>Generar Boleto Comprado</button>
+            </div>
+            <hr className="m-0" />
             { (isview) ? <IsUsuario/> : <IsBoletos/> }
         </>
 )}

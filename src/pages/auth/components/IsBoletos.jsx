@@ -42,7 +42,7 @@ export const IsBoletos = () => {
         <>
             <div className="registro-view">
                 <div className="n-ticket">
-                    <h4 className="text-center title m-4">Buscar boleto</h4> 
+                    <h4 className="text-center title p-4">Buscar boleto</h4> 
                     <div className="container d-flex justify-content-center">
                         <input className="form-control" type="tel" placeholder="Boleto" value={isValid} onChange={findBoleto}/>
                     </div>

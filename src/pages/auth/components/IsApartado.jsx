@@ -5,8 +5,7 @@ import { useLottoStore } from "../../../hooks/useLottoStore";
 export const IsApartado = () => {
 
     const { startFindApartados, apartados } = useLottoStore();
-
-    console.log(apartados.length);
+    const [dateTickets, setDateTickets] = useState([]);
     
     useEffect(() => {
         if(apartados.length > 0) return;
@@ -15,34 +14,16 @@ export const IsApartado = () => {
             console.log(response);
         }
         fetchData();
-    }, []);   
+    }, []);  
 
-    const res = {
-        "ok": true,
-        "aux": [
-            {
-                "usuario": "José Alberto Lopez Mares",
-                "telefono": "3311486141",
-                "numero": 11,
-                "fecha": "2024-06-16T20:56:58.662Z"
-            },
-            {
-                "usuario": "José Alfredo Lopez Mares",
-                "telefono": "3311486144",
-                "numero": 17,
-                "fecha": "2024-03-12T21:06:10.005Z"
-            },
-            {
-                "usuario": "Alfredo Lopez Mares",
-                "telefono": "3311486141",
-                "numero": 62,
-                "fecha": "2024-06-15T20:58:59.984Z"
-            }
-        ]
-    }
-
-    const fechaActual = new Date();
-    let color = "#00ff95";
+    useEffect(() => {
+        if(Object.keys(apartados).length > 0) {
+            let tickets = [...apartados];
+            setDateTickets(sortByDate(tickets));
+        }
+    }, [apartados]);
+    
+    const sortByDate = (data) => data.sort(({fecha: a}, {fecha: b}) => a < b ? -1 : a > b ? 1 : 0); 
 
     const isCompra = (e) => {
         e.preventDefault();
@@ -80,22 +61,31 @@ export const IsApartado = () => {
         });
     }
 
+    const fechaActual = new Date();
+    const apartado1 = "rgb(63,179,251)";
+    const apartado2 = "radial-gradient(circle, rgba(63,179,251,1) 0%, rgba(65,182,251,1) 12%, rgba(70,252,221,1) 100%)";
+    const vencido1 = "rgb(251,251,63)";
+    const vencido2 = "radial-gradient(circle, rgba(251,251,63,1) 0%, rgba(236,251,65,1) 12%, rgba(252,197,70,1) 100%)";
+    let color = "#00cc83";
+    let colorVencido = "#f7b63d";
+
     return (
         <div className="registro-view">
 
             {/* <BuscarUsuario/> */}
 
-            <h3 className="text-center m-2">Registro: Boletos Apartados</h3>
+            <hr className="hr-apartado p-2 m-0" />
+            <h3 className="text-center text-white">Boletos Apartados</h3>
+            <hr className="hr-apartado"/>
             <div className="container-info text-center">
                 {
-                    apartados.map((e, i) => {
-                    //res.aux.map((e, i) => {
+                    dateTickets.map((e, i) => {
                         const fecha = new Date(e.fecha);
                         const formato = e.numero.toString().padStart(5, '0');
-                        fecha.setHours(fecha.getHours()+10);
+                        fecha.setHours(fecha.getHours()+12);
                         if(fechaActual < fecha){
                             return (
-                                <div className="m-1 user-apartado" key={i} style={{backgroundColor: color}}>
+                                <div className="m-1 user-apartado" key={i} style={{background: apartado1, background: apartado2}}>
                                     <h6>{e.usuario}</h6>
                                     <p>{e.telefono}</p>
                                     <p>{formato} <i className="fa-solid fa-ticket"></i></p>
@@ -106,9 +96,8 @@ export const IsApartado = () => {
                                 </div>
                            )
                         } else {
-                            color = "#f7b63d";
                             return (
-                                <div className="m-1 user-apartado" key={i} style={{backgroundColor: color}}>
+                                <div className="m-1 user-apartado" key={i} style={{background: vencido1, background: vencido2}}>
                                     <h6>{e.usuario}</h6>
                                     <p>{e.telefono}</p>
                                     <p>{formato} <i className="fa-solid fa-ticket"></i></p>

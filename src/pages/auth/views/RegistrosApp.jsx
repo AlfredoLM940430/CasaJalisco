@@ -26,10 +26,10 @@ export const RegistrosApp = () => {
     return (
         <>
             <AdminNav/>
-            <div className="d-flex justify-content-center mt-3">
-                <button className="btn btn-primary m-1" onClick={viewApartados}>Apartados</button>
-                <button className="btn btn-dark" onClick={updateView} ><i className="fa-solid fa-repeat m-0 p-0"></i></button>
-                <button className="btn btn-primary m-1" onClick={viewComprados}>Comprados</button>
+            <div className="d-flex justify-content-center pt-3 pb-2 registro-ops">
+                <button className="btn ops-apartado m-1" onClick={viewApartados}>Apartados</button>
+                <button className="btn btn-secondary m-1" onClick={updateView} ><i className="fa-solid fa-repeat m-0 p-0"></i> Actualizar</button>
+                <button className="btn ops-comprado m-1" onClick={viewComprados}>Comprados</button>
             </div>
             { (isview) ? <IsApartado/> : <IsComprado/> }
         </>
