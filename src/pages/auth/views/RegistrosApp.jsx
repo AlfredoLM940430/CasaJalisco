@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AdminNav } from "../components/AdminNav"
 import { IsApartado } from "../components/IsApartado";
-import { IsComprado } from "../components/isComprado";
+import { IsComprado } from "../components/IsComprado";
 
 
 export const RegistrosApp = () => {

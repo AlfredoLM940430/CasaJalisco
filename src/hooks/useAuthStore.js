@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import lottoApi from "../api/casaJalisoApi";
 import { clearErrorMsg, onCheking, onLogin, onLogout } from "../store/auth/authSlice";
-import { onReset } from "../store/lotto/lottoSlice";
+import { onReset } from "../store/admin/adminSlice";
+//import { onReset } from "../store/lotto/lottoSlice";
 
 export const useAuthStore = () => {
     
@@ -43,7 +44,6 @@ export const useAuthStore = () => {
             dispatch(onLogout());
         }
     }
-    
 
     const startLogout = () => {
         localStorage.clear();

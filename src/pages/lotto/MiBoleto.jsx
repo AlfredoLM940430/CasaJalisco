@@ -62,8 +62,7 @@ export const MiBoleto = () => {
 
             {
                 (aux.comprados !== undefined && aux.comprados.length > 0) ? 
-                (<>
-                <div className="isTrue mb-2">
+                (<div className="isTrue mb-2">
                     {/* <h5>Premio: $50,000 MXN</h5> */}
                     <h5 className="mt-2">Mucha suerte! <i className="fa-solid fa-clover"/></h5>
                     <div className="info-card mb-4">
@@ -104,9 +103,7 @@ export const MiBoleto = () => {
                             </>) : <></>
                         }
                     </div>
-                </div>
-                </>)
-                : <NoComprados aux={aux}/>
+                </div>) : <NoComprados aux={aux}/>
             }
         </>
 )}

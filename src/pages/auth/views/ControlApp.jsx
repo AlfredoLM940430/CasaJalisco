@@ -1,37 +1,49 @@
 import { AdminNav } from "../components/AdminNav"
 import { useState } from "react";
-import { IsUsuario } from "../components/isUsuario";
-import { IsBoletos } from "../components/isBoletos";
-import { useLottoStore } from "../../../hooks/useLottoStore";
+import { useAdminStore } from "../../../hooks/useAdminStore";
+import { SetControlView } from "../components/setControlView";
 
 export const ControlApp = () => {
 
-    const { startResetState } = useLottoStore();
+    const { startResetState } = useAdminStore();
 
-    const [isview, setIsview] = useState(true);
+    const [isview, setIsview] = useState('usuarios');
 
     const viewUsuarios = () => {
-        setIsview(true);
+        setIsview('usuarios');
         startResetState();
     }
     const viewBoletos = () => {
-        setIsview(false);
+        setIsview('boletos');
         startResetState();
     }
-
+    const generarApartado = () => {
+        setIsview('apartar');
+        startResetState();
+    }
+    const generarComprado = () => {
+        setIsview('comprar');
+        startResetState();
+    }
+    const generarGanador = () => {
+        setIsview('loteria');
+        startResetState();
+    }
+    
     return (
         <>
             <AdminNav/>
             <div className="d-flex justify-content-center pt-3 registro-ops">
-                <button className="btn m-1 buscar-usuario" onClick={viewUsuarios}>Buscar Usuarios</button>
+                <button className="btn m-1 buscar-usuario" onClick={viewUsuarios}>Buscar Usuario</button>
                 <button className="btn m-1 buscar-boleto" onClick={viewBoletos}>Buscar Boletos</button>
             </div>
             <div className="d-flex justify-content-center registro-ops">
-                <button className="btn m-1 set-apartado" onClick={viewUsuarios}>Generar Boleto Apartado</button>
-                <button className="btn m-1 t-ganador" onClick={viewUsuarios}><i className="fa-solid fa-crown"></i> Boleto Ganador</button>
-                <button className="btn m-1 set-comprado" onClick={viewBoletos}>Generar Boleto Comprado</button>
+                <button className="btn m-1 set-apartado" onClick={generarApartado}>Apartar <i className="fa-solid fa-ticket"></i></button>
+                <button className="btn m-1 set-comprado" onClick={generarComprado}>Comprar <i className="fa-solid fa-ticket"></i></button>
             </div>
-            <hr className="m-0" />
-            { (isview) ? <IsUsuario/> : <IsBoletos/> }
+            <div className="d-flex justify-content-center registro-ops">
+                <button className="btn m-1 t-ganador" onClick={generarGanador}><i className="fa-solid fa-crown"></i> Boleto Ganador</button>
+            </div>
+            <SetControlView isView={isview} />
         </>
 )}

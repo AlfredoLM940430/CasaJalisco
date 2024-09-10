@@ -30,7 +30,7 @@ export const AppRouer = () => {
             navigate("/admin")
         } else if (status === 'not-authenticated') {
             setAuth(false);
-            navigate("/login")
+            //navigate("/login")
         } else {
             setAuth(false);
         }
