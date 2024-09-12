@@ -1,10 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLottoStore } from "./useLottoStore";
 
-export const useSaving = (isApartado, setIsApartado) => {
-
-    console.log(isApartado);
-    
+export const useSaving = (isApartado, setIsApartado, admin=false) => { 
 
     const { startSavingBoletos, registro, usuarios } = useLottoStore();
 
@@ -128,8 +125,8 @@ export const useSaving = (isApartado, setIsApartado) => {
 
     const onSubmit = async(e) => {
 
-        setFormSubmitted(true);        
         e.preventDefault();
+        setFormSubmitted(true);        
         const instructions = document.querySelector("#instructions");
 
         if(formValues.telefono === '' || formValues.nombre === '' || formValues.apellido === '' || formValues.estado === undefined) {
@@ -148,7 +145,7 @@ export const useSaving = (isApartado, setIsApartado) => {
             });
             return;
         }
-
+        
         //* SAVE *//
         const response = await startSavingBoletos(formValues);
         
@@ -169,7 +166,18 @@ export const useSaving = (isApartado, setIsApartado) => {
                 title: "Error",
                 html: "Alguien aparto tu(s) numero(s) justo antes que tu! <br><br> Intenta con otro(s)",
             }).then(() => {
-                window.location.reload();
+                if(!admin) {
+                    window.location.reload();
+                } else {
+                    setIsApartado([]);
+                    setFormValues({
+                        telefono: '',
+                        nombre: '',
+                        apellido: '',
+                        estado: '',
+                        boletos: JSON.stringify(isApartado),
+                    });
+                }
             });
             return;
         }
@@ -210,8 +218,19 @@ export const useSaving = (isApartado, setIsApartado) => {
                 title: "Alguien aparto algún numero antes que tu!",
                 html: "El resto fue apartado." + "\n" + "<br><br> Boleto(s) apartado(s): " + addIs(response.isApartados) + "\n" + "<br> Boleto(s) no apartado(s): " + addNo(response.noApartados),
             }).then(() => {
-                instructions.click();
-                window.location.href = '/';
+                if(!admin) {
+                    instructions.click();
+                    window.location.href = '/';
+                } else {
+                    setIsApartado([]);
+                    setFormValues({
+                        telefono: '',
+                        nombre: '',
+                        apellido: '',
+                        estado: '',
+                        boletos: JSON.stringify(isApartado),
+                    });
+                }
             });
             return;
         }
@@ -227,8 +246,26 @@ export const useSaving = (isApartado, setIsApartado) => {
         });
         //setIsMessage(false);
         //setShow(false);
-        instructions.click();
-        window.location.href = '/';
+        if(!admin) {
+            instructions.click();
+            window.location.href = '/';
+        } else {
+            setIsApartado([]);
+            setFormValues({
+                telefono: '',
+                nombre: '',
+                apellido: '',
+                estado: '',
+                boletos: JSON.stringify(isApartado),
+            });
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Registro Guardado!",
+                showConfirmButton: false,
+                timer: 1500
+              });
+        }
     }
 
     return {

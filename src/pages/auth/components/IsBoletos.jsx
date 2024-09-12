@@ -13,9 +13,17 @@ export const IsBoletos = () => {
     
     const findBoleto = async(e) => {
 
-        if(e.target.value.length > 10) e.target.value = e.target.value.slice(0, 10);
-        let number = e.target.value.replace(/\D/g, '');
-        setIsValid(number);
+        if(e.target.value.length > 5) e.target.value = e.target.value.slice(0, 5);
+        let ticket = e.target.value.replace(/\D/g, '');
+        if(Number(ticket) > 60000) {
+            Swal.fire({
+                icon: "warning",
+                text: "Numero fuera de rango",
+            });
+            setIsValid('');
+            return;
+        }
+        setIsValid(ticket);
     }
 
     const startFindUser = async () => {

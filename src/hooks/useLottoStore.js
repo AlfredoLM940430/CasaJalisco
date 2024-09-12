@@ -7,7 +7,7 @@ export const useLottoStore = () => {
     const { boletos, usuarios, isLoadingEvents, registro, boletos_usuarios, usuarioId, ticketsID, apartados } = useSelector(state => state.lotto);
     const dispatch = useDispatch();
 
-    const startSavingBoletos = async(formValues) => {
+    const startSavingBoletos = async(formValues) => {       
         try {
             const data = await lottoApi.post('/lotto/boletaje', formValues);
             dispatch(onAddRegister({apartados: data.data.isApartados, no_apartados: data.data.noApartados}));

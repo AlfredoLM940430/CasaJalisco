@@ -39,7 +39,7 @@ export const ControlApp = () => {
             </div>
             <div className="d-flex justify-content-center registro-ops">
                 <button className="btn m-1 set-apartado" onClick={generarApartado}>Apartar <i className="fa-solid fa-ticket"></i></button>
-                <button className="btn m-1 set-comprado" onClick={generarComprado}>Comprar <i className="fa-solid fa-ticket"></i></button>
+                {/* <button className="btn m-1 set-comprado" onClick={generarComprado}>Comprar <i className="fa-solid fa-ticket"></i></button> */}
             </div>
             <div className="d-flex justify-content-center registro-ops">
                 <button className="btn m-1 t-ganador" onClick={generarGanador}><i className="fa-solid fa-crown"></i> Boleto Ganador</button>
