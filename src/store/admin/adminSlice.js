@@ -7,6 +7,7 @@ const initialState = {
     ticketsID: [ ],
     savedTicket: [ ],
     deletedTicket: [ ],
+    isW: [ ],
     isLoadingComprados: true,
     comprados: [ ],
 }
@@ -47,6 +48,9 @@ export const adminSlice = createSlice({
         onUnconfirmTicket: (state, { payload = []}) => {          
             state.deletedTicket = payload
         },
+        onFindGanador: (state, { payload = []}) => {          
+            state.isW = payload.id
+        },
         onFindComprados: (state, { payload = []} ) => {
             state.isLoadingComprados = false;
             state.comprados = [];
@@ -70,4 +74,4 @@ export const adminSlice = createSlice({
     },
 });
 
-export const { onFindApartados, onFindUserId, onFindTicket, onConfirmTicket, onUnconfirmTicket, onFindComprados, onClear, onReset } = adminSlice.actions;
+export const { onFindApartados, onFindUserId, onFindTicket, onConfirmTicket, onUnconfirmTicket, onFindGanador, onFindComprados, onClear, onReset } = adminSlice.actions;

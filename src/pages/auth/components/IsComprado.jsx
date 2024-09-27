@@ -3,16 +3,7 @@ import { useAdminStore } from "../../../hooks/useAdminStore";
 
 export const IsComprado = () => {
 
-    const { comprados, startFindComprados } = useAdminStore();
-
-    useEffect(() => {
-        if(comprados.length > 0) return;
-        async function fetchData() {
-            let response = await startFindComprados();
-            console.log(response);
-        }
-        fetchData();
-    }, []);    
+    const { comprados } = useAdminStore(); 
 
     return (
         <div className="registro-view">

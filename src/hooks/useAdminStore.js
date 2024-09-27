@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import lottoApi from "../api/casaJalisoApi";
-import { onFindComprados, onUnconfirmTicket, onConfirmTicket, onFindApartados, onFindTicket, onFindUserId, onReset, onClear } from "../store/admin/adminSlice";
+import { onFindComprados, onUnconfirmTicket, onConfirmTicket, onFindApartados, onFindTicket, onFindUserId, onFindGanador, onReset, onClear } from "../store/admin/adminSlice";
 
 export const useAdminStore = () => {
 
-    const { apartados, usuarioId, ticketsID, savedTicket, deletedTicket, comprados } = useSelector(state => state.admin);
+    const { apartados, isW, usuarioId, ticketsID, savedTicket, deletedTicket, comprados } = useSelector(state => state.admin);
 
     const dispatch = useDispatch();
 
@@ -53,7 +53,7 @@ export const useAdminStore = () => {
 
     const startSavingConfirmed = async(ticket) => {              
         try {
-            const data = await lottoApi.post('/admin/compra', ticket);  //!!!!!!!!!!!!!
+            const data = await lottoApi.post('/admin/compra', ticket);
             console.log(data.data);
             dispatch(onConfirmTicket(data.data));
             return data.data;
@@ -85,6 +85,37 @@ export const useAdminStore = () => {
         }
     }
 
+    const startFindGanador = async() => {
+        try {
+            const data = await lottoApi.get('/admin/ganador');
+            dispatch(onFindGanador(data.data));
+            return data.data;
+        } catch (error) {
+            console.log(error);
+            return error
+        }
+    }
+
+    const startSavingWinner = async(ticket) => {
+        try {
+            const data = await lottoApi.post('/admin/winner', ticket);
+            return data.data;
+        } catch (error) {
+            console.log(error);
+            return error
+        }
+    }
+
+    const startResetGanador = async(ticket) => {
+        try {
+            const data = await lottoApi.post('/admin/reset');
+            return data.data;
+        } catch (error) {
+            console.log(error);
+            return error
+        }
+    }
+
     const startResetState = () => {
         dispatch(onReset());
     }
@@ -96,6 +127,7 @@ export const useAdminStore = () => {
     return {
         // Propiedades
         apartados,
+        isW,
         usuarioId,
         ticketsID,
         savedTicket,
@@ -104,7 +136,6 @@ export const useAdminStore = () => {
         onReset,
         onClear,
         
-
         //Metodos
         startFindApartados,
         startFindUserById,
@@ -112,10 +143,12 @@ export const useAdminStore = () => {
         startSavingConfirmed,
         startDeleteUnconfirmed,
         startFindComprados,
+        startSavingWinner,
+        startFindGanador,
+        startResetGanador,
 
         updateFindApartados,
         startUpdateUserById,
-
         resetSD,
         startResetState,
     }

@@ -6,15 +6,7 @@ export const IsApartado = () => {
 
     const { apartados, startFindApartados, updateFindApartados, savedTicket, deletedTicket, resetSD } = useAdminStore();
     const [dateTickets, setDateTickets] = useState([]);
-    
-    useEffect(() => {
-        if(apartados.length > 0) return;
-        async function fetchData() {
-            let response = await startFindApartados();
-            console.log(response);
-        }
-        fetchData();
-    }, []);
+    const [call, setCall] = useState(false);
 
     useEffect(() => {
         if(Object.keys(apartados).length > 0) {

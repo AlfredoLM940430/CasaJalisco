@@ -24,10 +24,10 @@ export const HandleApartados = ({ticketsApartados, note=''}) => {
             ticketsApartados.map((e, i) => {
                 let fecha = '';
                 (e.fecha) ? fecha = new Date(e.fecha) : fecha = new Date(e.fechaApartado);
-                //const fecha = new Date(e.fecha);
-                fecha.setHours(fecha.getHours()+12);
+                const auxfecha = new Date(e.fecha);
+               auxfecha.setHours(fecha.getHours()+12);
                 const formato = e.numero.toString().padStart(5, '0');
-                if(fechaActual < fecha){
+                if(fechaActual < auxfecha){
                     return (
                         <div className="m-1 ticket-apartado user-apartado" key={i}>
                             {(note == '') ? <></> : <p className="text-uppercase">{note}</p>}
