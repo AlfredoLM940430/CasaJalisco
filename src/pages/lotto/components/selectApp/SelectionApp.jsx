@@ -53,7 +53,7 @@ export const SelectionApp = () => {
                 {<NumerosApartados isApartado={isApartado} setIsApartado={setIsApartado}/>}
                 <p className="mt-4">Busca tu Numero</p>
                 <div className="mb-4">
-                    <input type="number" className="form-control" value={isNumero} placeholder={formato} onChange={handleChange} />
+                    <input className="form-control" type="tel" value={isNumero} onChange={handleChange} placeholder={formato}/>
                 </div>
                 {<ControlApartado boletos={boletos} isApartado={isApartado} setIsApartado={setIsApartado} isNumero={isNumero} setIsNumero={setIsNumero}/>}
                 <h5 className="text-center mb-0">Numeros Disponibles</h5>

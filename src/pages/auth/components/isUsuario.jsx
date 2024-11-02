@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-import { useLottoStore } from "../../../hooks/useLottoStore";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../hooks/useAuthStore";
+import { useAdminStore } from "../../../hooks/useAdminStore";
+import { HandleApartados } from "./HandleApartados";
+import { HandleComprados } from "./HandleComprados";
 
 export const IsUsuario = () => {
 
-    const { startFindUserById, usuarioId } = useLottoStore();
+    const { startFindUserById, savedTicket, startUpdateUserById, deletedTicket, usuarioId, resetSD, } = useAdminStore();
     const { startLogout } = useAuthStore();
     const [isValid, setIsValid] = useState('');
-    const [data, setData] = useState({})
-    const navigate = useNavigate();
+
+    console.log(savedTicket);
     
     const findCel = async(e) => {
-
         if(e.target.value.length > 10) e.target.value = e.target.value.slice(0, 10);
         let number = e.target.value.replace(/\D/g, '');
         setIsValid(number);
@@ -39,63 +40,78 @@ export const IsUsuario = () => {
                     });
                 }
             }
-            setData(response);
             setIsValid('');
         }
     }
 
-    const aux = (Object.keys(usuarioId).length > 0) ? usuarioId : '';
+    if(Object.keys(usuarioId).length > 0) {
+        let updateComprados = [...usuarioId.comprados];
+        updateComprados.push(savedTicket.registro);
+    }
+    
+    useEffect(() => {
+        if((Object.keys(savedTicket).length !== 0 && typeof(savedTicket.registro.numero) == 'number') && (Object.keys(usuarioId).length !== 0)) {
+            let updateApartados = usuarioId.apartados.filter(e=> e.numero != savedTicket.registro.numero);
+            let updateComprados = [...usuarioId.comprados];
+            updateComprados.push(savedTicket.registro);
+            let aux = {
+                ok: "true",
+                usuario: usuarioId.usuario,
+                apartados: updateApartados,
+                comprados: updateComprados,
+            }
+            startUpdateUserById(aux);
+            resetSD();
+        }
+    }, [savedTicket]);
 
     useEffect(() => {
-        if(aux !== '') {
-            window.scroll({top: 300, behavior: "smooth"})
-        }
-    }, [usuarioId]);
+        if(Object.keys(deletedTicket).length !== 0 && typeof(deletedTicket.registro.numero) == 'number') {
+            let updateApartados = usuarioId.apartados.filter(e=> e.numero != deletedTicket.registro.numero);
+            let updateComprados = [...usuarioId.comprados];
+            let aux = {
+                ok: "true",
+                usuario: usuarioId.usuario,
+                apartados: updateApartados,
+                comprados: updateComprados,
+            }
+            startUpdateUserById(aux);
+            resetSD();
+        }        
+    }, [deletedTicket]);
 
-    console.log(usuarioId);
+    const aux = (Object.keys(usuarioId).length > 0) ? usuarioId : '';
+    useEffect(() => {
+        if(aux !== '') window.scroll({top: 300, behavior: "smooth"});
+    }, [usuarioId]);    
 
     return (
         <>
             <div className="registro-view">
                 <div className="n-ticket">
-                    <h4 className="text-center title p-4">Buscar usuario</h4> 
+                    <div className="p-4">
+                        <hr className="m-0 hr-aqua" />
+                        <h4 className="text-center title p-2">Buscar usuario</h4> 
+                        <hr className="m-0 hr-aqua" />
+                    </div>
                     <div className="container d-flex justify-content-center">
                         <input className="form-control" type="tel" placeholder="Telefono" value={isValid} onChange={findCel}/>
                     </div>
                 </div>
-                { (Object.keys(usuarioId).length > 2)
-                 ?  (
-                        <>
-                            <div className="container pt-5">
-                                <h2 className="text-center">Info:</h2>
-                                <table className="table table-bordered">
-                                    <thead className="thead-dark">
-                                        <tr>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">Apellido</th>
-                                            <th scope="col">Ubicación</th>
-                                            <th scope="col">Telefono</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{usuarioId.usuario.nombre}</td>
-                                            <td>{usuarioId.usuario.apellido}</td>
-                                            <td>{usuarioId.usuario.estado}</td>
-                                            <td>{usuarioId.usuario.telefono}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <h2 className="text-center">Boletos:</h2>
-                            </div>
-                        </>
-                    )
-                 :  (
-                        <></>
-                    )
-
-
-                }
+                {(Object.keys(usuarioId).length > 2) ? 
+                (<div className="isTrue p-5 text-white">
+                    <div className="info-card-admin">
+                        <p className="pt-2"> <i className="fa-solid fa-user"></i> Nombre: <span>{usuarioId.usuario.nombre} {usuarioId.usuario.apellido}</span></p>
+                        <p> <i className="fa-brands fa-square-whatsapp"></i> Telefono: <span>{usuarioId.usuario.telefono}</span></p>
+                        <p> <i className="fa-solid fa-location-dot"></i> Ubicacion: <span>{usuarioId.usuario.estado}</span></p>
+                        <p> <i className="fa-solid fa-ticket"></i> Apartados: <span>{Object.keys(usuarioId.apartados).length}</span></p>
+                        <p className="pb-2"> <i className="fa-solid fa-ticket"></i> Comprados: <span>{Object.keys(usuarioId.comprados).length}</span></p>
+                    </div>
+                    <hr />
+                    <HandleApartados ticketsApartados={usuarioId.apartados} />
+                    <hr />
+                    <HandleComprados telefono={usuarioId.usuario.telefono} ticketsComprados={usuarioId.comprados} />
+                </div>): (<></>)}
             </div>
         </>
 )}

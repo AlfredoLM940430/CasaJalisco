@@ -7,11 +7,13 @@ export const MiBoleto = () => {
     // API
     const { startFindBoletos, boletos_usuarios } = useLottoStore();
     const [isValid, setIsValid] = useState('');
+    const [winner, setWinner] = useState(false);
     
     const findCel = async(e) => {
         //setIsboleto(false);
         if(e.target.value.length > 10) e.target.value = e.target.value.slice(0, 10);
         let number = e.target.value.replace(/\D/g, '');
+        //let number = e.target.value;
         setIsValid(number);
         if(number.length === 10) {
             e.target.blur();
@@ -30,11 +32,18 @@ export const MiBoleto = () => {
     const aux = (Object.keys(boletos_usuarios).length > 0) ? boletos_usuarios : '';
 
     useEffect(() => {
+        
         console.log(aux);
         if(aux !== '') {
-            window.scroll({top: 300, behavior: "smooth"})
+            window.scroll({top: 300, behavior: "smooth"});
+            if(aux.ganador) {
+                setWinner(true);
+            } else {
+                setWinner(false);
+            }
         }
     }, [boletos_usuarios]);
+    
 
     return (
         <>
@@ -58,12 +67,11 @@ export const MiBoleto = () => {
                 <a target="_blank" rel="noopener" href={"https://wa.me/+523311486142"}><i className="fa-brands fa-whatsapp"></i></a>
                 <p>Tienes alguna duda?</p>
             </div>
-            <hr id="info"/>
+            <hr id="info"/> 
 
             {
                 (aux.comprados !== undefined && aux.comprados.length > 0) ? 
-                (<>
-                <div className="isTrue mb-2">
+                (<div className="isTrue mb-2">
                     {/* <h5>Premio: $50,000 MXN</h5> */}
                     <h5 className="mt-2">Mucha suerte! <i className="fa-solid fa-clover"/></h5>
                     <div className="info-card mb-4">
@@ -104,9 +112,7 @@ export const MiBoleto = () => {
                             </>) : <></>
                         }
                     </div>
-                </div>
-                </>)
-                : <NoComprados aux={aux}/>
+                </div>) : <NoComprados aux={aux}/>
             }
         </>
 )}

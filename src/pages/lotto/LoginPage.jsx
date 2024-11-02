@@ -16,7 +16,13 @@ export const LoginPage = () => {
 
     const loginSubmit = (event) => {
         event.preventDefault();
-        startLogin({email: loginEmail, contraseña: loginPassword});
+        const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+        if(loginEmail.match(validRegex)) {
+            startLogin({email: loginEmail, contraseña: loginPassword.replace(/[^a-zA-Z0-9]/g, "")});
+        } else {
+            Swal.fire('Correo Invalido', errorMessage, 'error');
+        }
     }
 
     useEffect(() => {

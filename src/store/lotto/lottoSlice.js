@@ -11,7 +11,7 @@ const initialState = {
     boletos_usuarios: [ ],
     usuarioId: [ ],
     ticketsID: [ ],
-    apartados: [ ],
+    //apartados: [ ],
 }
 
 export const lottoSlice = createSlice({
@@ -50,18 +50,18 @@ export const lottoSlice = createSlice({
         onFindTicket: (state, { payload = []} ) => {
             state.ticketsID = payload
         },
-        onFindApartados: (state, { payload = []} ) => {
-            state.isLoadingApartados = false;
-            state.apartados = [];
-            payload.apartados.forEach(el => {
-                const exist = state.apartados.some(dbUser => dbUser.numero === el.numero)
-                if (!exist) {
-                    state.apartados.push(el)
-                }
-            });
-        },
-        onReset: (state) => (state = initialState)
+        // onFindApartados: (state, { payload = []} ) => {
+        //     state.isLoadingApartados = false;
+        //     state.apartados = [];
+        //     payload.apartados.forEach(el => {
+        //         const exist = state.apartados.some(dbUser => dbUser.numero === el.numero)
+        //         if (!exist) {
+        //             state.apartados.push(el)
+        //         }
+        //     });
+        // },
+        onReset: (state) => (state = initialState),
      },
 });
 
-export const { onLoadEvents, onLoadusers, onFindBoletos, onAddRegister, onFindUserId, onFindTicket, onFindApartados, onReset } = lottoSlice.actions;
+export const { onLoadEvents, onLoadusers, onFindBoletos, onAddRegister, boletos_usuarios, onFindUserId, onFindTicket } = lottoSlice.actions;

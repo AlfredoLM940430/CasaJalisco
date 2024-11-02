@@ -22,7 +22,7 @@ export const AdminNav = () => {
                     <NavLink className="nav-link" to="/registro"><i className="fa-solid fa-users"></i> Registro</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/control"><i className="fa-solid fa-list"></i> Control</NavLink>
+                    <NavLink className="nav-link" to="/control"><i className="fa-solid fa-gear"></i> Control</NavLink>
                 </li>
                 {/* <li className="nav-item">
                     <NavLink className="nav-link" to="info"><i className="fa-solid fa-circle-info"></i> Info</NavLink>

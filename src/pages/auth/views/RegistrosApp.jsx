@@ -1,26 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AdminNav } from "../components/AdminNav"
 import { IsApartado } from "../components/IsApartado";
-import { IsComprado } from "../components/isComprado";
+import { IsComprado } from "../components/IsComprado";
+import { useAdminStore } from "../../../hooks/useAdminStore";
 
 
 export const RegistrosApp = () => {
 
+    const { apartados, comprados, startFindApartados, startFindComprados } = useAdminStore();
     const [isview, setIsview] = useState(true);
+    const [callComprados, setCallComprados] = useState(false);
+
+    useEffect(() => {
+        if(apartados.length > 0) return;
+        async function fetchData() {
+            let response = await startFindApartados();
+        }
+        fetchData();
+    }, []);
 
     const viewApartados = () => {
         setIsview(true);
     }
-    const viewComprados = () => {
+    const viewComprados = async() => {
         setIsview(false);
+        setCallComprados(true);         
+        if((comprados.length > 0) || (callComprados)) return;
+        let response = await startFindComprados();
     }
 
-    const updateView = () => {
-        if(isview) {
-            console.log('actualizando apartados');
-        } else {
-            console.log('actualizando comprados');
-        }
+    const updateView = async() => {
+        await startFindApartados();
+        await startFindComprados();
     }
     
     return (
