@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useLottoStore } from "../../../../hooks/useLottoStore";
 
-export const CompraModal = ({isApartado, setIsApartado}) => {
+export const CompraModal = ({isApartado, setIsApartado}) => {  
     
     const { startSavingBoletos, registro, usuarios } = useLottoStore();
 
