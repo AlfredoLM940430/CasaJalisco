@@ -51,10 +51,25 @@
 }
 
 .ticket-apartado {
+.ticket-apartado {
     padding: 1rem;
     border-radius: 0.7rem;
     min-width: 14rem;
     min-height: 10rem;
+}
+
+.user-apartado {
+    background: rgb(63,179,251);
+    background: radial-gradient(circle, rgba(63,179,251,1) 0%, rgba(65,182,251,1) 12%, rgba(70,252,221,1) 100%);
+}
+
+.user-vencido {
+    background: rgb(251,251,63);
+    background: radial-gradient(circle, rgba(251,251,63,1) 0%, rgba(236,251,65,1) 12%, rgba(252,197,70,1) 100%);
+}
+
+.user-comprado {
+    background-color: #85bb65;
 }
 
 .user-apartado {
@@ -92,6 +107,7 @@
 
 .registro-view {
     background-color: #0f256e;
+    min-height: 90vh;
     min-height: 90vh;
 }
 
