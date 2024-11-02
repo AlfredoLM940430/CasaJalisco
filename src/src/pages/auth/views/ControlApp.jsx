@@ -2,19 +2,14 @@ import { AdminNav } from "../components/AdminNav"
 import { useState } from "react";
 import { useAdminStore } from "../../../hooks/useAdminStore";
 import { SetControlView } from "../components/setControlView";
-import { useAdminStore } from "../../../hooks/useAdminStore";
-import { SetControlView } from "../components/setControlView";
 
 export const ControlApp = () => {
 
     const { startResetState } = useAdminStore();
-    const { startResetState } = useAdminStore();
 
-    const [isview, setIsview] = useState('usuarios');
     const [isview, setIsview] = useState('usuarios');
 
     const viewUsuarios = () => {
-        setIsview('usuarios');
         setIsview('usuarios');
         startResetState();
     }
@@ -35,12 +30,10 @@ export const ControlApp = () => {
         startResetState();
     }
     
-    
     return (
         <>
             <AdminNav/>
             <div className="d-flex justify-content-center pt-3 registro-ops">
-                <button className="btn m-1 buscar-usuario" onClick={viewUsuarios}>Buscar Usuario</button>
                 <button className="btn m-1 buscar-usuario" onClick={viewUsuarios}>Buscar Usuario</button>
                 <button className="btn m-1 buscar-boleto" onClick={viewBoletos}>Buscar Boletos</button>
             </div>
@@ -51,7 +44,6 @@ export const ControlApp = () => {
             <div className="d-flex justify-content-center registro-ops">
                 <button className="btn m-1 t-ganador" onClick={viewGanador}><i className="fa-solid fa-crown"></i></button>
             </div>
-            <SetControlView isView={isview} />
             <SetControlView isView={isview} />
         </>
 )}
