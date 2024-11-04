@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLottoStore } from "../../hooks/useLottoStore";
 import { NoComprados } from "./components/NoComprados";
+import { ConfettiApp } from "../auth/components/ConfettiApp";
+import { ViewGanador } from "./components/ViewGanador";
+import { ViewBoletos } from "./components/ViewBoletos";
 
 export const MiBoleto = () => {
 
@@ -8,6 +11,7 @@ export const MiBoleto = () => {
     const { startFindBoletos, boletos_usuarios } = useLottoStore();
     const [isValid, setIsValid] = useState('');
     const [winner, setWinner] = useState(false);
+    const [isConfetti, setIsConfetti] = useState(false);
     
     const findCel = async(e) => {
         //setIsboleto(false);
@@ -33,7 +37,35 @@ export const MiBoleto = () => {
 
     useEffect(() => {
         
-        console.log(aux);
+        if(aux.ganador) {
+            console.log(`Muchas felicidades ${aux.usuario.nombre}<i class="fa-solid fa-star" style="color: #FFD43B;"></i>, tienes el numero ganador!!!`);
+            
+            setIsConfetti(aux.ganador);
+            Swal.fire({
+                title: `Muchas Felicidades ${aux.usuario.nombre}!!!`,
+                html: `
+                    <div>
+                        <p>Tu tienes el numero ganador: <i class="fa-solid fa-clover"></i> ${aux.gdtkt} <i class="fa-solid fa-clover"></i></p>
+                        <br/>
+                        <p>Pronto nos pondremos en contacto contigo.</p>
+                    </div>
+                `,
+                width: 600,
+                padding: "3em",
+                color: "#716add",
+                //background: "#fff url(/images/trees.png)",
+                backdrop: `
+                  rgba(0,0,123,0.4)
+                  url("/public/img/nyan-cat.gif")
+                  left top
+                  no-repeat
+                `
+              });
+        } else {
+            setIsConfetti(false);
+        }
+            
+        //console.log(aux);
         if(aux !== '') {
             window.scroll({top: 300, behavior: "smooth"});
             if(aux.ganador) {
@@ -42,8 +74,7 @@ export const MiBoleto = () => {
                 setWinner(false);
             }
         }
-    }, [boletos_usuarios]);
-    
+    }, [boletos_usuarios]);    
 
     return (
         <>
@@ -67,52 +98,9 @@ export const MiBoleto = () => {
                 <a target="_blank" rel="noopener" href={"https://wa.me/+523311486142"}><i className="fa-brands fa-whatsapp"></i></a>
                 <p>Tienes alguna duda?</p>
             </div>
-            <hr id="info"/> 
-
-            {
-                (aux.comprados !== undefined && aux.comprados.length > 0) ? 
-                (<div className="isTrue mb-2">
-                    {/* <h5>Premio: $50,000 MXN</h5> */}
-                    <h5 className="mt-2">Mucha suerte! <i className="fa-solid fa-clover"/></h5>
-                    <div className="info-card mb-4">
-                        <h6 className="m-2">Resumen:</h6>
-                        <p> <i className="fa-solid fa-user"></i> Nombre: <span>{`${aux.usuario.nombre + " " + aux.usuario.apellido}`}</span></p>
-                        <p> <i className="fa-brands fa-square-whatsapp"></i> Telefono: <span>{`${aux.usuario.telefono}`}</span></p>
-                        <p> <i className="fa-solid fa-location-dot"></i> Ubicacion: <span>{`${aux.usuario.estado}`}</span></p>
-                        <p> <i className="fa-solid fa-gift"></i> Premio: <span>$150,000</span></p>
-                        <p> <i className="fa-solid fa-ticket"></i> Boletos Pagados: <span>{`${aux.comprados.length} Numeros `}<i className="fa-solid fa-hand-point-down"></i> <i className="fa-solid fa-hand-point-down"></i> <i className="fa-solid fa-hand-point-down"></i></span></p>
-                        {/* <h5 className="">Tus Boletos:</h5> */}
-                        <div className="container-t">
-                            {
-                                aux.comprados.map((e) => {
-                                    return (
-                                        <div className="ticketN m-1" key={e}>
-                                            <p className="serialN">{e}</p>
-                                        </div>                                      
-                                    )
-                                })
-                            }
-                        </div>
-                        { (aux.apartados.length > 0) ?
-                            
-                            (<>
-                                <p><i className="fa-solid fa-ticket"></i> Boletos Apartados: <span>{`${aux.apartados.length} Numeros `}<i className="fa-solid fa-hand-point-down"></i> <i className="fa-solid fa-hand-point-down"></i> <i className="fa-solid fa-hand-point-down"></i></span></p>
-                                <p className="info-apartados">*Apurate a comprarlos o podrias perderlos <i className="fa-regular fa-clock"></i></p>
-                                <div className="container-t">
-                                    {
-                                        aux.apartados.map((e) => {
-                                            return (
-                                                <div className="ticketN m-1" key={e}>
-                                                    <p className="serialN">{e}</p>
-                                                </div>                                      
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </>) : <></>
-                        }
-                    </div>
-                </div>) : <NoComprados aux={aux}/>
-            }
+            <hr id="info"/>
+            { isConfetti ? <ConfettiApp height={document.body.offsetHeight} /> : <></> }
+            <ViewBoletos aux={aux} />
+            {/* { isConfetti ? <ViewGanador aux={aux}/> : <ViewBoletos aux={aux} /> } */}
         </>
 )}
